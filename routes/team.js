@@ -6,7 +6,7 @@ var pool= require('./pool')
 /* GET home page. */
 router.post('/submit_team',  upload.single("icon"),function(req, res, next) {
     try {
-        pool.query("insert into team (membername, memberrole, memberdescription, img_url) values(?,?,?,?)",[req.body.membername, req.body.memberrole, req.body.memberdescription,  req.file.filename],function(error,result){
+        pool.query("insert into team (membername, memberrole, memberdescription, img_url,instagram,linkedin) values(?,?,?,?,?,?)",[req.body.membername, req.body.memberrole, req.body.memberdescription,  req.file.filename,req.body.instagram,req.body.linkedin],function(error,result){
             if (error){
                 res.status(200).json({status:false,message:'databse error... pls contact dbs'})
             }
@@ -22,7 +22,7 @@ router.post('/submit_team',  upload.single("icon"),function(req, res, next) {
 });
 router.post('/edit_team', function(req, res, next) {
     try {
-        pool.query("update team set membername=?, memberrole=?, memberdescription=? where teamid=?",[req.body.membername, req.body.memberrole, req.body.memberdescription,  req.body.teamid],function(error,result){
+        pool.query("update team set membername=?, memberrole=?, memberdescription=?, linkedin=?,instagram=? where teamid=?",[req.body.membername, req.body.memberrole, req.body.memberdescription, req.body.linkedin,req.body.instagram, req.body.teamid],function(error,result){
             if (error){
                 res.status(200).json({status:false,message:'databse error... pls contact dbs'})
             }
