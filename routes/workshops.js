@@ -3,37 +3,35 @@ var router = express.Router();
 var upload = require('./multer');
 var pool = require('./pool');
 
-router.post('/submit_event', upload.single("icon"), function(req, res, next) {
-  try {
-     console.log("🟢 Form received:", req.body);
-    console.log("📦 Uploaded file:", req.file);
-pool.query("insert into workshops ( eventname, date, time, type, icon, eventdescription, location,status,) values(?,?,?,?,?,?,?,?)",
+router.post('/submit_event',upload.single("icon"),function(req,res,next){
 
-[
-  req.body.eventname,
-  req.body.date,
-  req.body.time,
-  req.body.type,
-  req.file.filename,
-  req.body.eventdescription,
-  req.body.location,
-  req.body.status,
-  
-],
-
-
-      function(error, result) {
-        if (error) {
-          res.status(200).json({ status: false, message: 'Database error... please contact DB admin' });
-        } else {
-          res.status(200).json({ status: true, message: 'Event was added successfully' });
-        }
-      }
-    );
-  } catch (e) {
-    res.status(200).json({ status: false, message: 'Technical issue... please contact server administrator' });
-  }
+try {
+        pool.query("insert into workshops (eventname, date, time, type, icon, eventdescription, location, status, created_at) values(?,?,?,?,?,?,?,?,?)",
+          [req.body. eventname,  
+            req.body.date, 
+            req.body.time,
+              req.file.filename,
+              req.body.type,
+               req.body.location,
+                req.body. status,
+              req.body.eventdescription],function(error,result){
+            if (error){
+                res.status(200).json({status:false,message:'databse error... pls contact dbs'})
+            }
+            else {
+                res.status(200).json({status:true,message:'team  member was added succesfully'})
+            }
+        })
+    }
+    catch(e){
+        res.status(200).json({status:false,message:'there are tecnical issue... plscontact server admininstrater'})
+    }
+ 
 });
+      
+
+// GET test route to check DB connection
+
 
 router.get('/display_all_event', function(req, res, next) {
     try {
