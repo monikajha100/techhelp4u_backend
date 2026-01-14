@@ -59,5 +59,10 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+app.use(express.static(path.join(__dirname, 'build')));
 
+// 🔥 Always LAST
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
 module.exports = app;

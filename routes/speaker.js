@@ -71,7 +71,7 @@ router.post('/edit_speaker', function(req, res, next) {
         })
     }
     catch(e){
-        res.status(200).json({status:false,message:'there are tecnical issue... plscontact server admininstrater'})
+        res.status(200).json({status:false,message:'there are technical issue... plscontact server admininstrater'})
     }
  
 });

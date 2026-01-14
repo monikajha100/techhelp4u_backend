@@ -104,6 +104,4 @@ router.get('/display_event_by_id/:id', (req, res) => {
 });
 
 
-
-
-    module.exports = router;
+module.exports = router;

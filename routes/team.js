@@ -83,7 +83,7 @@ router.get('/display_all_team',function(req, res, next) {
     try {
         pool.query("select * from team",function(error,result){
             if (error){
-                console.log(e)
+               
                 res.status(200).json({status:false,message:'databse error... pls contact dbs'})
             }
             else {
